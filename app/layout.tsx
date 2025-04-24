@@ -12,7 +12,14 @@ const inter = Inter({ subsets: ["latin"] })
 export const metadata: Metadata = {
   title: "Briefing | Modern News",
   description: "Stay informed with the latest news in a clean, modern interface",
-    generator: 'v0.dev'
+  icons: {
+    icon: [
+      { url: '/briefing-logo.svg', type: 'image/svg+xml' }
+    ],
+    apple: [
+      { url: '/briefing-logo.svg', type: 'image/svg+xml' }
+    ]
+  }
 }
 
 export default function RootLayout({
