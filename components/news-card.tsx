@@ -17,11 +17,11 @@ export function NewsCard({ article, priority = false, featured = false }: NewsCa
   return (
     <Link href={article.url} target="_blank" rel="noopener noreferrer">
       <Card
-        className={`overflow-hidden group transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/10 border-white/10 bg-white/5 backdrop-blur-sm ${
+        className={`glassmorphic-card overflow-hidden group transition-all duration-300 border-white/10 ${
           featured ? "md:col-span-2 md:row-span-2" : ""
         }`}
       >
-        <div className="relative aspect-video overflow-hidden">
+        <div className="relative aspect-video overflow-hidden rounded-t-lg">
           <Image
             src={article.urlToImage || "/placeholder.svg?height=400&width=600"}
             alt={article.title}
@@ -30,30 +30,38 @@ export function NewsCard({ article, priority = false, featured = false }: NewsCa
             className="object-cover transition-transform duration-500 group-hover:scale-105"
             priority={priority}
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
 
           {article.source.name && (
-            <span className="absolute top-3 left-3 bg-white/50 backdrop-blur-sm text-xs px-2 py-1 rounded-full">
+            <span className="absolute top-3 left-3 glassmorphic-light text-xs px-3 py-1 rounded-full font-medium">
               {article.source.name}
             </span>
           )}
+          
+          <div className="absolute bottom-3 right-3">
+            <div className="glassmorphic-light w-2 h-2 rounded-full animate-pulse-slow"></div>
+          </div>
         </div>
 
-        <CardContent className="p-4">
-          <div className="space-y-2">
+        <CardContent className="p-5">
+          <div className="space-y-3">
             <h3
-              className={`font-bold text-white line-clamp-2 group-hover:text-purple-400 transition-colors ${
+              className={`font-bold text-white line-clamp-2 group-hover:text-gradient transition-colors duration-300 ${
                 featured ? "text-xl md:text-2xl" : "text-lg"
               }`}
             >
               {article.title}
             </h3>
 
-            {article.description && <p className="text-white/70 text-sm line-clamp-2">{article.description}</p>}
+            {article.description && (
+              <p className="text-white/70 text-sm line-clamp-2">
+                {article.description}
+              </p>
+            )}
 
-            <div className="flex items-center justify-between text-xs text-white/60 pt-2">
-              <span>{formattedDate}</span>
-              <span className="inline-flex items-center">
+            <div className="flex items-center justify-between text-xs text-white/60 pt-3">
+              <span className="bg-white/5 px-2 py-1 rounded-md">{formattedDate}</span>
+              <span className="inline-flex items-center glassmorphic-light px-3 py-1 rounded-full transition-all duration-300 group-hover:pr-4">
                 Read more
                 <svg
                   className="w-3 h-3 ml-1 transition-transform duration-300 group-hover:translate-x-1"

@@ -46,6 +46,11 @@
     --border: 240 3.7% 15.9%;
     --input: 240 3.7% 15.9%;
     --ring: 142.4 71.8% 29.2%;
+    
+    /* New gradient color variables */
+    --gradient-purple: 267 100% 58%;
+    --gradient-pink: 328 100% 63%;
+    --gradient-blue: 217 100% 62%;
   }
 }
 
@@ -56,6 +61,33 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+/* Glassmorphism effects */
+.glassmorphic {
+  background: rgba(15, 15, 15, 0.5);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+}
+
+.glassmorphic-light {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.1);
+}
+
+.glassmorphic-card {
+  @apply glassmorphic rounded-lg transition-all duration-300 hover:shadow-lg;
+  transform: translateY(0);
+}
+
+.glassmorphic-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.3);
 }
 
 /* Custom animations */
@@ -79,12 +111,67 @@
   }
 }
 
+@keyframes glow {
+  0% {
+    box-shadow: 0 0 5px rgba(125, 39, 255, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(125, 39, 255, 0.7);
+  }
+  100% {
+    box-shadow: 0 0 5px rgba(125, 39, 255, 0.3);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Animation classes */
 .animate-fade-in {
   animation: fadeIn 0.5s ease forwards;
 }
 
 .animate-slide-up {
   animation: slideUp 0.5s ease forwards;
+}
+
+.animate-glow {
+  animation: glow 3s infinite;
+}
+
+.animate-pulse-slow {
+  animation: pulse 3s infinite;
+}
+
+/* Text with gradient */
+.text-gradient {
+  background: linear-gradient(90deg, hsl(var(--gradient-purple)), hsl(var(--gradient-pink)), hsl(var(--gradient-blue)));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  background-size: 200% auto;
+  animation: textGradient 4s linear infinite;
+}
+
+@keyframes textGradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 /* Staggered animation for news cards */

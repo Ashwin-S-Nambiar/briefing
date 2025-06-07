@@ -34,7 +34,11 @@ export default function RootLayout({
           <div className="relative flex min-h-screen flex-col">
             <GridBackground />
             <Header />
-            <main className="flex-1 container mx-auto px-4 py-8 relative z-10">{children}</main>
+            <main className="flex-1 container mx-auto px-4 py-8 relative z-10">
+              <div className="animate-fade-in glassmorphic p-6 rounded-xl mb-8">
+                {children}
+              </div>
+            </main>
             <Footer />
           </div>
         </ThemeProvider>

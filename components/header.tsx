@@ -26,24 +26,28 @@ export function Header() {
   }, [pathname]);
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-white/10 bg-black/80 backdrop-blur-lg">
+    <header className="sticky top-0 z-50 w-full glassmorphic">
       <div className="container mx-auto flex h-16 items-center justify-between px-4">
         <div className="flex items-center space-x-4">
           {/* Mobile Menu */}
           <Sheet>
             <SheetTrigger asChild>
-              <Button variant="ghost" size="icon" className="md:hidden">
+              <Button variant="ghost" size="icon" className="md:hidden text-white/90 hover:bg-white/10">
                 <MenuIcon className="h-6 w-6" />
                 <span className="sr-only">Toggle Menu</span>
               </Button>
             </SheetTrigger>
-            <SheetContent side="left" className="w-64 border-r border-white/10 bg-black/90 p-4">
-              <nav className="flex flex-col space-y-4">
+            <SheetContent side="left" className="glassmorphic w-64 border-r border-white/10 p-6">
+              <nav className="flex flex-col space-y-6 mt-6">
                 {navItems.map((item) => (
                   <Link
                     key={item.href}
                     href={item.href}
-                    className={`text-sm font-medium transition-colors ${activePath === item.href ? 'text-purple-400' : 'text-white/80 hover:text-white'}`}
+                    className={`text-sm font-medium transition-all duration-300 ${
+                      activePath === item.href 
+                        ? 'text-gradient font-bold' 
+                        : 'text-white/80 hover:text-white hover:translate-x-1'
+                    }`}
                   >
                     {item.name}
                   </Link>
@@ -56,7 +60,7 @@ export function Header() {
           <div className="flex items-center">
             <Link
               href="/"
-              className="text-2xl font-bold bg-gradient-to-r from-purple-400 via-blue-500 to-teal-400 bg-clip-text text-transparent"
+              className="text-2xl font-bold text-gradient animate-glow"
             >
               Briefing
             </Link>
@@ -64,18 +68,20 @@ export function Header() {
         </div>
 
         {/* Desktop Navigation (Pill Style) */}
-        <nav className="hidden md:flex items-center space-x-1 bg-white/5 p-1 rounded-full">
+        <nav className="hidden md:flex items-center space-x-1 glassmorphic-light p-1 rounded-full">
           {navItems.map((item) => (
             <Link
               key={item.href}
               href={item.href}
               onClick={() => setActivePath(item.href)} 
-              className={`relative px-4 py-1.5 text-sm font-medium transition-colors rounded-full ${activePath === item.href ? 'text-white' : 'text-white/70 hover:text-white'}`}
+              className={`relative px-4 py-1.5 text-sm font-medium transition-colors rounded-full ${
+                activePath === item.href ? 'text-white' : 'text-white/70 hover:text-white'
+              }`}
             >
               {activePath === item.href && (
                 <motion.div
                   layoutId="active-pill" 
-                  className="absolute inset-0 bg-purple-600 rounded-full z-0"
+                  className="absolute inset-0 bg-gradient-to-r from-purple-600 via-pink-500 to-blue-500 rounded-full z-0"
                   transition={{ type: "spring", stiffness: 380, damping: 30 }}
                 />
               )}
@@ -86,10 +92,12 @@ export function Header() {
 
         {/* Search Icon */}
         <div className="flex items-center">
-          <Button variant="ghost" size="icon">
-            <SearchIcon className="h-5 w-5" />
-            <span className="sr-only">Search</span>
-          </Button>
+          <Link href="/search">
+            <Button variant="ghost" size="icon" className="glassmorphic-light rounded-full w-10 h-10 hover:animate-pulse-slow">
+              <SearchIcon className="h-5 w-5" />
+              <span className="sr-only">Search</span>
+            </Button>
+          </Link>
         </div>
       </div>
     </header>
