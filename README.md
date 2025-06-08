@@ -8,7 +8,7 @@
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
 ![Radix UI](https://img.shields.io/badge/Radix_UI-161618?style=for-the-badge&logo=radix-ui&logoColor=white)
 
-A modern news application with a sleek, modern interface, designed to keep you informed with the latest news from around the world in various categories.
+A modern news application with a sleek interface, designed to keep you informed with the latest news from around the world in various categories.
 
 [Features](#-features) • [Tech Stack](#-tech-stack) • [Installation](#-installation) • [Contributing](#-contributing) • [Screenshots](#-screenshots) • [Live Demo](#-live-demo) • [License](#-license)
 
