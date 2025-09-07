@@ -122,28 +122,6 @@ We welcome contributions to make Briefing News App even better! Here's how:
    ```
 5. Open a Pull Request
 
-## 📸 Screenshots
-
-<div align="center">
-
-### Home Page
-![Home Page](./public/screenshots/home-page.png)
-*The main landing page showing the latest news articles.*
-
-### Category View
-![Category View](./public/screenshots/category-view.png)
-*Browse news by specific categories.*
-
-### Dark Mode
-![Dark Mode](./public/screenshots/dark-mode.png)
-*The application in dark mode for comfortable reading in low-light conditions.*
-
-### Mobile View
-![Mobile View](./public/screenshots/mobile-view.png)
-*Responsive design optimized for mobile devices.*
-
-</div>
-
 ## 🌍 Live Demo
 
 <div align="center">
