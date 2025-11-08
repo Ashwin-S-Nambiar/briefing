@@ -1,4 +1,4 @@
-# Briefing News App 📰
+# Briefing News App
 
 <div align="center">
 
@@ -14,19 +14,19 @@ A modern news application with a sleek and modern interface, designed to keep yo
 
 </div>
 
-## ✨ Features
+## Features
 
-- 📱 **Responsive Design** - Optimized for all device sizes with a mobile-first approach
-- 🌙 **Dark/Light Mode** - Choose between light and dark themes for comfortable reading
-- 📋 **Categorized News** - Browse news by categories (Business, Technology, Sports, etc.)
-- 🔍 **Search Functionality** - Find specific news articles with an intuitive search feature
-- 📄 **Article Detail View** - Read full articles with rich content and images
-- 🔄 **Real-time Updates** - Stay up-to-date with the latest news as it happens
-- 🔗 **Share Articles** - Easily share interesting articles with friends and colleagues
-- ⚡ **Fast Loading** - Optimized for performance with Next.js and server-side rendering
-- 🎨 **Modern UI Components** - Built with Radix UI and styled with Tailwind CSS
+- **Responsive Design** - Optimized for all device sizes with a mobile-first approach
+- **Dark/Light Mode** - Choose between light and dark themes for comfortable reading
+- **Categorized News** - Browse news by categories (Business, Technology, Sports, etc.)
+- **Search Functionality** - Find specific news articles with an intuitive search feature
+- **Article Detail View** - Read full articles with rich content and images
+- **Real-time Updates** - Stay up-to-date with the latest news as it happens
+- **Share Articles** - Easily share interesting articles with friends and colleagues
+- **Fast Loading** - Optimized for performance with Next.js and server-side rendering
+- **Modern UI Components** - Built with Radix UI and styled with Tailwind CSS
 
-## 🛠 Tech Stack
+## Tech Stack
 
 ### Frontend Development
 - **[Next.js 15](https://nextjs.org/)** - React framework for production with server-side rendering
@@ -46,7 +46,7 @@ A modern news application with a sleek and modern interface, designed to keep yo
 - **[Recharts](https://recharts.org/)** - Charting library for React
 - **[Embla Carousel](https://www.embla-carousel.com/)** - Carousel component
 
-## 🚀 Installation
+## Installation
 
 1. **Clone the repository**
 
@@ -100,7 +100,7 @@ A modern news application with a sleek and modern interface, designed to keep yo
    pnpm start
    ```
 
-## 🤝 Contributing
+## Contributing
 
 We welcome contributions to make Briefing News App even better! Here's how:
 
@@ -122,17 +122,13 @@ We welcome contributions to make Briefing News App even better! Here's how:
    ```
 5. Open a Pull Request
 
-## 🌍 Live Demo
+## Live Demo
 
 <div align="center">
 
 [![Visit Site](https://img.shields.io/badge/Visit_Demo-000?style=for-the-badge&logo=vercel&logoColor=white)](https://briefing-chi.vercel.app/)
 
 </div>
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ---
 
