@@ -133,5 +133,5 @@ We welcome contributions to make Briefing News App even better! Here's how:
 ---
 
 <div align="center">
-Made with ❤️ by Your Name
+Made with ❤️ by Ashwin S Nambiar
 </div>
