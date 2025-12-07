@@ -3,101 +3,119 @@
 import { useState, useEffect } from 'react';
 import Link from "next/link";
 import { usePathname } from 'next/navigation';
-import { motion } from 'framer-motion';
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { MenuIcon, SearchIcon } from "lucide-react";
+import { cn } from '@/lib/utils';
 
 const navItems = [
   { name: "Home", href: "/" },
-  { name: "Technology", href: "/categories/technology" },
+  { name: "Sports", href: "/categories/sports" },
   { name: "Business", href: "/categories/business" },
+  { name: "Politics", href: "/categories/politics" }, // Note: 'Politics' might not be a direct API category, usually 'General' covers it, but we'll leave link for now
+  { name: "Tech & Media", href: "/categories/technology" },
   { name: "Science", href: "/categories/science" },
-  { name: "Health", href: "/categories/health" }, 
-  { name: "Sports", href: "/categories/sports" },   
 ];
 
 export function Header() {
   const pathname = usePathname();
   const [activePath, setActivePath] = useState(pathname);
+  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
     setActivePath(pathname);
+    
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, [pathname]);
 
   return (
-    <header className="sticky top-0 z-50 w-full glassmorphic">
-      <div className="container mx-auto flex h-16 items-center justify-between px-4">
-        <div className="flex items-center space-x-4">
-          {/* Mobile Menu */}
-          <Sheet>
-            <SheetTrigger asChild>
-              <Button variant="ghost" size="icon" className="md:hidden text-white/90 hover:bg-white/10">
-                <MenuIcon className="h-6 w-6" />
-                <span className="sr-only">Toggle Menu</span>
-              </Button>
-            </SheetTrigger>
-            <SheetContent side="left" className="glassmorphic w-64 border-r border-white/10 p-6">
-              <nav className="flex flex-col space-y-6 mt-6">
-                {navItems.map((item) => (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    className={`text-sm font-medium transition-all duration-300 ${
-                      activePath === item.href 
-                        ? 'text-gradient font-bold' 
-                        : 'text-white/80 hover:text-white hover:translate-x-1'
-                    }`}
-                  >
-                    {item.name}
-                  </Link>
-                ))}
-              </nav>
-            </SheetContent>
-          </Sheet>
-
-          {/* Logo */}
-          <div className="flex items-center">
-            <Link
-              href="/"
-              className="text-2xl font-bold text-gradient animate-glow"
-            >
-              Briefing
-            </Link>
-          </div>
+    <header className={cn(
+      "sticky top-0 z-50 w-full transition-all duration-300 border-b border-black/5",
+      scrolled ? "bg-[#fdfbf7]/90 backdrop-blur-md py-2 shadow-sm" : "bg-transparent py-6"
+    )}>
+      <div className="container mx-auto flex items-center justify-between px-4 md:px-0">
+        
+        {/* Logo */}
+        <div className="flex items-center">
+          <Link
+            href="/"
+            className="flex items-center gap-2 group"
+          >
+            <div className="bg-black text-white p-1 rounded-md">
+              <span className="font-heading font-black text-xl tracking-tighter">BN</span>
+            </div>
+            <span className="font-heading font-black text-2xl tracking-tight text-black">Briefing News</span>
+          </Link>
         </div>
 
-        {/* Desktop Navigation (Pill Style) */}
-        <nav className="hidden md:flex items-center space-x-1 glassmorphic-light p-1 rounded-full">
+        {/* Desktop Navigation */}
+        <nav className="hidden lg:flex items-center space-x-8">
           {navItems.map((item) => (
             <Link
               key={item.href}
               href={item.href}
               onClick={() => setActivePath(item.href)} 
-              className={`relative px-4 py-1.5 text-sm font-medium transition-colors rounded-full ${
-                activePath === item.href ? 'text-white' : 'text-white/70 hover:text-white'
-              }`}
-            >
-              {activePath === item.href && (
-                <motion.div
-                  layoutId="active-pill" 
-                  className="absolute inset-0 bg-gradient-to-r from-purple-600 via-pink-500 to-blue-500 rounded-full z-0"
-                  transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                />
+              className={cn(
+                "text-sm font-medium transition-colors nav-link",
+                activePath === item.href ? "text-black" : "text-black/60 hover:text-black"
               )}
-              <span className="relative z-10">{item.name}</span>
+            >
+              {item.name}
             </Link>
           ))}
+          <Link href="/search" className="text-black/60 hover:text-black transition-colors">
+             <SearchIcon className="w-5 h-5" />
+          </Link>
         </nav>
 
-        {/* Search Icon */}
-        <div className="flex items-center">
-          <Link href="/search">
-            <Button variant="ghost" size="icon" className="glassmorphic-light rounded-full w-10 h-10 hover:animate-pulse-slow">
-              <SearchIcon className="h-5 w-5" />
-              <span className="sr-only">Search</span>
+        {/* Action Button & Mobile Menu */}
+        <div className="flex items-center gap-4">
+           <Link href="/contact" className="hidden sm:block">
+            <Button className="rounded-full bg-brand-orange hover:bg-brand-orange/90 text-black font-semibold px-6 shadow-sm hover:shadow-md transition-all">
+              Contact Us
             </Button>
-          </Link>
+           </Link>
+
+          {/* Mobile Menu */}
+          <Sheet>
+            <SheetTrigger asChild>
+              <Button variant="ghost" size="icon" className="lg:hidden text-black hover:bg-black/5">
+                <MenuIcon className="h-6 w-6" />
+                <span className="sr-only">Toggle Menu</span>
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="right" className="w-[300px] paper-texture border-l border-black/10">
+              <div className="flex flex-col gap-8 mt-8">
+                <div className="flex flex-col space-y-4">
+                  {navItems.map((item) => (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      className={cn(
+                        "text-lg font-medium transition-colors hover:translate-x-2 duration-300",
+                        activePath === item.href ? "text-brand-orange font-bold" : "text-black/80"
+                      )}
+                    >
+                      {item.name}
+                    </Link>
+                  ))}
+                  <Link href="/search" className="flex items-center gap-2 text-lg font-medium text-black/80 hover:translate-x-2 duration-300">
+                    <SearchIcon className="w-5 h-5" /> Search
+                  </Link>
+                </div>
+                <div className="pt-8 border-t border-black/10">
+                   <Button className="w-full rounded-full bg-brand-orange hover:bg-brand-orange/90 text-black font-semibold shadow-sm">
+                    Contact Us
+                  </Button>
+                </div>
+              </div>
+            </SheetContent>
+          </Sheet>
         </div>
       </div>
     </header>

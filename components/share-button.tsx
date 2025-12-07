@@ -56,12 +56,12 @@ export function ShareButton({ title, url }: ShareButtonProps) {
   return (
     <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline" size="sm" className="gap-2 border-white/10 bg-white/5">
+        <Button variant="glass" size="sm" className="gap-2">
           <Share2 className="h-4 w-4" />
           Share
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="w-56 bg-black/90 backdrop-blur-md border-white/10">
+      <DropdownMenuContent align="end" className="w-56 glassmorphic text-white border-white/10">
         <DropdownMenuItem onClick={handleCopyLink} className="gap-2 cursor-pointer">
           <Copy className="h-4 w-4" />
           Copy link

@@ -6,21 +6,23 @@ interface SkeletonCardProps {
 
 export function SkeletonCard({ featured = false }: SkeletonCardProps) {
   return (
-    <Card
-      className={`overflow-hidden border-white/10 bg-white/5 backdrop-blur-sm ${
-        featured ? "md:col-span-2 md:row-span-2" : ""
-      }`}
-    >
-      <div className="relative aspect-video bg-white/10 animate-pulse" />
+    <Card className="h-full border border-black/5 bg-white shadow-sm rounded-2xl overflow-hidden">
+      <div className="relative aspect-[4/3] bg-black/5 animate-pulse" />
 
-      <CardContent className="p-4 space-y-3">
-        <div className={`h-6 ${featured ? "md:h-8" : ""} bg-white/10 rounded animate-pulse`} />
-        <div className="h-4 bg-white/10 rounded animate-pulse w-3/4" />
-        <div className="h-4 bg-white/10 rounded animate-pulse w-1/2" />
+      <CardContent className="p-6 space-y-4">
+        <div className="flex items-center justify-between">
+           <div className="h-3 bg-black/5 rounded w-1/4 animate-pulse" />
+           <div className="h-3 bg-black/5 rounded w-1/5 animate-pulse" />
+        </div>
+        
+        <div className="h-6 bg-black/5 rounded w-full animate-pulse" />
+        <div className="h-6 bg-black/5 rounded w-2/3 animate-pulse" />
+        
+        <div className="h-4 bg-black/5 rounded w-full animate-pulse mt-4" />
+        <div className="h-4 bg-black/5 rounded w-5/6 animate-pulse" />
 
-        <div className="flex items-center justify-between pt-2">
-          <div className="h-3 bg-white/10 rounded animate-pulse w-20" />
-          <div className="h-3 bg-white/10 rounded animate-pulse w-16" />
+        <div className="pt-4">
+          <div className="h-4 bg-black/5 rounded w-1/3 animate-pulse" />
         </div>
       </CardContent>
     </Card>

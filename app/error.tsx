@@ -16,7 +16,7 @@ export default function Error({ error, reset }: ErrorProps) {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-[70vh] text-center px-4">
-      <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-red-400 via-orange-500 to-yellow-400 bg-clip-text text-transparent mb-6">
+      <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-red-500 via-orange-500 to-yellow-500 bg-clip-text text-transparent mb-6 animate-pulse">
         Something went wrong
       </h1>
       <p className="text-white/70 max-w-md mb-8">

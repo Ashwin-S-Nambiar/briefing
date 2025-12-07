@@ -15,13 +15,13 @@ export async function generateMetadata({ params }: ArticlePageProps) {
 
   if (!article) {
     return {
-      title: "Article Not Found | Briefing",
+      title: "Article Not Found | Briefing News",
     }
   }
 
   return {
-    title: `${article.title} | Briefing`,
-    description: article.description || "Read the full article on Briefing.",
+    title: `${article.title} | Briefing News`,
+    description: article.description || "Read the full article on Briefing News.",
     openGraph: {
       images: [
         {
@@ -36,16 +36,12 @@ export async function generateMetadata({ params }: ArticlePageProps) {
 
 async function getArticleFromSlug(slug: string) {
   try {
-    // First try to find in top headlines
     const topHeadlines = await getTopHeadlines("", "us", 100)
-
     let article = topHeadlines.articles.find((article) => generateArticleSlug(article) === slug)
 
-    // If not found, try to search more broadly
     if (!article) {
-      // Extract potential keywords from the slug
       const keywords = slug
-        .replace(/-\d+$/, "") // Remove timestamp part
+        .replace(/-\d+$/, "") 
         .split("-")
         .filter((word) => word.length > 3)
         .join(" ")
@@ -74,21 +70,35 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
   const timeAgo = formatDistanceToNow(new Date(article.publishedAt), { addSuffix: true })
 
   return (
-    <article className="max-w-4xl mx-auto animate-fade-in">
-      <div className="space-y-4 mb-8">
-        <h1 className="text-3xl md:text-4xl font-bold leading-tight">{article.title}</h1>
+    <article className="max-w-4xl mx-auto animate-fade-in-up">
+      <div className="space-y-6 mb-10 text-center">
+         <div className="flex items-center justify-center gap-2 mb-4">
+           {article.source.name && (
+             <span className="bg-brand-orange/20 text-brand-dark px-3 py-1 rounded-full text-sm font-bold tracking-wide uppercase">
+               {article.source.name}
+             </span>
+           )}
+           <time dateTime={article.publishedAt} title={formattedDate} className="text-sm text-muted-foreground font-medium">
+             {formattedDate}
+           </time>
+         </div>
 
-        <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-white/70">
-          {article.source.name && <span className="bg-white/10 px-2 py-1 rounded-full">{article.source.name}</span>}
-          <time dateTime={article.publishedAt} title={formattedDate}>
-            {timeAgo}
-          </time>
-          {article.author && <span>By {article.author}</span>}
-        </div>
+        <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-black leading-tight text-black">
+          {article.title}
+        </h1>
+
+        {article.author && (
+          <div className="flex items-center justify-center gap-2 text-muted-foreground">
+             <div className="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center font-bold text-xs">
+                {article.author.charAt(0)}
+             </div>
+             <span className="font-medium">By {article.author}</span>
+          </div>
+        )}
       </div>
 
       {article.urlToImage && (
-        <div className="relative aspect-video mb-8 rounded-lg overflow-hidden">
+        <div className="relative aspect-[16/9] mb-12 rounded-3xl overflow-hidden shadow-xl border border-black/5">
           <Image
             src={article.urlToImage || "/placeholder.svg"}
             alt={article.title}
@@ -99,53 +109,48 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
         </div>
       )}
 
-      <div className="flex justify-end mb-8">
-        <ShareButton title={article.title} url={typeof window !== "undefined" ? window.location.href : ""} />
-      </div>
+      <div className="max-w-3xl mx-auto">
+        <div className="flex justify-between items-center mb-8 pb-8 border-b border-black/10">
+           <div className="text-sm font-bold text-black">
+              Share this story
+           </div>
+           <ShareButton title={article.title} url={typeof window !== "undefined" ? window.location.href : ""} />
+        </div>
 
-      <div className="prose prose-invert max-w-none">
-        {article.description && <p className="text-xl font-medium text-white/90 mb-6">{article.description}</p>}
+        <div className="prose prose-lg prose-stone max-w-none">
+          {article.description && (
+            <p className="lead text-xl md:text-2xl font-medium text-black/90 mb-8 leading-relaxed">
+              {article.description}
+            </p>
+          )}
 
-        {article.content ? (
-          <div>
-            {article.content
-              .replace(/\[\+\d+ chars\]$/, "")
-              .split("\n")
-              .map((paragraph, index) => (
-                <p key={index} className="mb-4 text-white/80">
-                  {paragraph}
+          {article.content ? (
+            <div className="text-black/80 space-y-6">
+              {article.content
+                .replace(/[+\d+ chars]$/, "")
+                .split("\n")
+                .map((paragraph, index) => (
+                  <p key={index} className="leading-relaxed">
+                    {paragraph}
+                  </p>
+                ))}
+            </div>
+          ) : (
+             <div className="bg-brand-orange/10 p-8 rounded-2xl text-center">
+                <p className="text-lg text-black/80 mb-4">
+                  To read the full story, please visit the original source.
                 </p>
-              ))}
-          </div>
-        ) : (
-          <p className="text-white/80">
-            Continue reading the full article at{" "}
-            <a
-              href={article.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-purple-400 hover:text-purple-300 transition-colors"
-            >
-              {article.source.name || "the source"}
-            </a>
-            .
-          </p>
-        )}
-      </div>
-
-      <div className="mt-12 pt-8 border-t border-white/10">
-        <p className="text-white/60 text-sm">
-          This article was originally published on{" "}
-          <a
-            href={article.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-purple-400 hover:text-purple-300 transition-colors"
-          >
-            {article.source.name || "the source website"}
-          </a>
-          .
-        </p>
+                <a
+                  href={article.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-full text-black bg-brand-orange hover:bg-brand-orange/90 transition-colors shadow-sm"
+                >
+                  Continue Reading on {article.source.name || "Source"}
+                </a>
+             </div>
+          )}
+        </div>
       </div>
     </article>
   )
