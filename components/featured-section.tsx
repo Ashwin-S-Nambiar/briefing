@@ -18,7 +18,7 @@ export function FeaturedSection({ articles }: FeaturedSectionProps) {
   const sideArticles = articles.slice(1, 4)
 
   return (
-    <section className="w-full mb-16 animate-fade-in-up">
+    <section className="w-full mb-16">
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
         
         {/* Main Hero Article */}
@@ -31,7 +31,7 @@ export function FeaturedSection({ articles }: FeaturedSectionProps) {
               className="object-cover transition-transform duration-700 group-hover:scale-105"
               priority
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+            <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent" />
             
             <div className="absolute top-6 left-6">
                <span className="bg-white/90 backdrop-blur-md text-black px-4 py-1.5 rounded-full text-sm font-bold shadow-sm">
@@ -40,7 +40,7 @@ export function FeaturedSection({ articles }: FeaturedSectionProps) {
             </div>
 
             <div className="absolute bottom-0 left-0 p-8 md:p-10 w-full max-w-3xl">
-              <h2 className="font-heading text-3xl md:text-5xl font-bold text-white mb-4 leading-tight group-hover:underline decoration-brand-orange decoration-4 underline-offset-8">
+              <h2 className="font-heading text-3xl md:text-5xl font-bold text-white mb-4 leading-tight">
                 {mainArticle.title}
               </h2>
               <p className="text-white/80 text-lg line-clamp-2 md:line-clamp-3 max-w-2xl mb-6">

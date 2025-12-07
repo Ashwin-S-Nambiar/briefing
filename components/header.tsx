@@ -12,7 +12,7 @@ const navItems = [
   { name: "Home", href: "/" },
   { name: "Sports", href: "/categories/sports" },
   { name: "Business", href: "/categories/business" },
-  { name: "Politics", href: "/categories/politics" }, // Note: 'Politics' might not be a direct API category, usually 'General' covers it, but we'll leave link for now
+  { name: "Politics", href: "/categories/politics" }, 
   { name: "Tech & Media", href: "/categories/technology" },
   { name: "Science", href: "/categories/science" },
 ];
@@ -20,24 +20,13 @@ const navItems = [
 export function Header() {
   const pathname = usePathname();
   const [activePath, setActivePath] = useState(pathname);
-  const [scrolled, setScrolled] = useState(false);
-
+  
   useEffect(() => {
     setActivePath(pathname);
-    
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
   }, [pathname]);
 
   return (
-    <header className={cn(
-      "sticky top-0 z-50 w-full transition-all duration-300 border-b border-black/5",
-      scrolled ? "bg-[#fdfbf7]/90 backdrop-blur-md py-2 shadow-sm" : "bg-transparent py-6"
-    )}>
+    <header className="sticky top-0 z-50 w-full border-b border-black/5 px-4 bg-[#fdfbf7]/95 backdrop-blur-md py-4 shadow-sm">
       <div className="container mx-auto flex items-center justify-between px-4 md:px-0">
         
         {/* Logo */}

@@ -18,7 +18,7 @@ export function NewsCard({ article, featured = false }: NewsCardProps) {
   return (
     <Link href={article.url} target="_blank" rel="noopener noreferrer" className="group h-full block">
       <Card className="h-full border border-black/5 bg-white shadow-sm hover:shadow-xl transition-all duration-300 rounded-2xl overflow-hidden hover:-translate-y-1">
-        <div className="relative aspect-[4/3] overflow-hidden">
+        <div className="relative aspect-4/3 overflow-hidden">
           <Image
             src={article.urlToImage || "/placeholder.svg?height=600&width=800"}
             alt={article.title}

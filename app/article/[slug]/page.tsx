@@ -98,7 +98,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
       </div>
 
       {article.urlToImage && (
-        <div className="relative aspect-[16/9] mb-12 rounded-3xl overflow-hidden shadow-xl border border-black/5">
+        <div className="relative aspect-video mb-12 rounded-3xl overflow-hidden shadow-xl border border-black/5">
           <Image
             src={article.urlToImage || "/placeholder.svg"}
             alt={article.title}

@@ -7,7 +7,7 @@ interface SkeletonCardProps {
 export function SkeletonCard({ featured = false }: SkeletonCardProps) {
   return (
     <Card className="h-full border border-black/5 bg-white shadow-sm rounded-2xl overflow-hidden">
-      <div className="relative aspect-[4/3] bg-black/5 animate-pulse" />
+      <div className="relative aspect-4/3 bg-black/5 animate-pulse" />
 
       <CardContent className="p-6 space-y-4">
         <div className="flex items-center justify-between">
