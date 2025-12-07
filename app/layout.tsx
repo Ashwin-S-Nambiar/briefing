@@ -36,7 +36,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.variable} ${playfair.variable} min-h-screen antialiased flex flex-col items-center py-4 md:py-8 px-4`}>
+      <body className={`${inter.variable} ${playfair.variable} min-h-screen antialiased flex flex-col`}>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false} disableTransitionOnChange>
           <SmoothScroller>
             {/* Main Animated Container */}
