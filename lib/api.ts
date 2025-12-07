@@ -103,7 +103,8 @@ export async function getTopHeadlines(
   category = "",
   country = "us",
   pageSize = 10,
-  page?: string
+  page?: string,
+  forceRefresh = false
 ): Promise<NewsResponse> {
   try {
     // Validate environment variables
@@ -135,7 +136,7 @@ export async function getTopHeadlines(
 
     const url = `${BASE_URL}/latest?${params.toString()}`
     const response = await fetch(url, {
-      next: { revalidate: 3600 }, // Revalidate every hour
+      next: { revalidate: forceRefresh ? 0 : 3600 }, // Revalidate every hour unless forced
     })
 
     if (!response.ok) {

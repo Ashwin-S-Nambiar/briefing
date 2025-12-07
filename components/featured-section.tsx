@@ -1,11 +1,10 @@
 "use client"
 
 import Link from "next/link"
-import Image from "next/image"
+import { ImageWithFallback } from "@/components/ui/image-with-fallback"
 import { Button } from "@/components/ui/button"
 import type { Article } from "@/lib/api"
 import { formatDistanceToNow } from "date-fns"
-import { PlayCircle, ArrowRight } from "lucide-react"
 
 interface FeaturedSectionProps {
   articles: Article[]
@@ -15,7 +14,14 @@ export function FeaturedSection({ articles }: FeaturedSectionProps) {
   if (!articles || articles.length === 0) return null
 
   const mainArticle = articles[0]
-  const sideArticles = articles.slice(1, 4)
+  // Filter out any articles that match the main article (by URL or title) to avoid duplicates
+  const uniqueSideArticles = articles
+    .slice(1)
+    .filter(article => 
+      article.url !== mainArticle.url && 
+      article.title !== mainArticle.title
+    )
+    .slice(0, 3)
 
   return (
     <section className="w-full mb-16">
@@ -24,12 +30,15 @@ export function FeaturedSection({ articles }: FeaturedSectionProps) {
         {/* Main Hero Article */}
         <div className="lg:col-span-8 relative group rounded-3xl overflow-hidden shadow-md">
           <Link href={mainArticle.url} target="_blank" rel="noopener noreferrer" className="block relative h-[500px] w-full">
-            <Image
+            <ImageWithFallback
               src={mainArticle.urlToImage || "/placeholder.svg?height=800&width=1200"}
+              fallbackSrc="/placeholder.svg?height=800&width=1200"
               alt={mainArticle.title}
               fill
-              className="object-cover transition-transform duration-700 group-hover:scale-105"
+              className="object-cover"
               priority
+              sizes="(max-width: 1024px) 100vw, 66vw"
+              quality={90}
             />
             <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent" />
             
@@ -52,7 +61,7 @@ export function FeaturedSection({ articles }: FeaturedSectionProps) {
 
         {/* Side Articles List */}
         <div className="lg:col-span-4 flex flex-col gap-4">
-          {sideArticles.map((article, index) => (
+          {uniqueSideArticles.map((article, index) => (
              <Link 
                key={index} 
                href={article.url} 
@@ -61,11 +70,14 @@ export function FeaturedSection({ articles }: FeaturedSectionProps) {
                className="group flex gap-4 p-4 rounded-2xl bg-white border border-black/5 hover:shadow-lg hover:border-brand-orange/20 transition-all duration-300"
              >
                <div className="relative w-24 h-24 shrink-0 rounded-xl overflow-hidden">
-                 <Image
+                 <ImageWithFallback
                     src={article.urlToImage || "/placeholder.svg?height=200&width=200"}
+                    fallbackSrc="/placeholder.svg?height=200&width=200"
                     alt={article.title}
                     fill
-                    className="object-cover group-hover:scale-110 transition-transform duration-500"
+                    className="object-cover"
+                    sizes="96px"
+                    quality={85}
                  />
                </div>
                <div className="flex flex-col justify-between py-1">

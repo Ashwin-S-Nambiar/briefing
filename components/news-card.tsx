@@ -23,8 +23,10 @@ export function NewsCard({ article, featured = false }: NewsCardProps) {
             src={article.urlToImage || "/placeholder.svg?height=600&width=800"}
             alt={article.title}
             fill
-            className="object-cover transition-transform duration-700 group-hover:scale-105"
+            className="object-cover"
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            quality={85}
+            unoptimized={article.urlToImage?.includes('http')}
           />
           {article.source.name && (
             <span className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-black shadow-sm tracking-wide">

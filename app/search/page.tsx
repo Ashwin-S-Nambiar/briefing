@@ -1,5 +1,5 @@
 import { Suspense } from "react"
-import { searchNews } from "@/lib/api"
+import { searchNews, type NewsResponse } from "@/lib/api"
 import { NewsGrid } from "@/components/news-grid"
 import { SkeletonGrid } from "@/components/skeleton-grid"
 import { SearchInput } from "@/components/search-input"
@@ -22,7 +22,7 @@ export async function generateMetadata({ searchParams }: SearchPageProps) {
 export default async function SearchPage({ searchParams }: SearchPageProps) {
   const query = searchParams.q || ""
   
-  let data = { articles: [], totalResults: 0 }
+  let data: NewsResponse = { status: "ok", articles: [], totalResults: 0 }
   
   if (query) {
     try {

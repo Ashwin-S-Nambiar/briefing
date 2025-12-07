@@ -2,7 +2,6 @@
 
 import { usePathname } from "next/navigation";
 import { LenisExpandingDiv } from "./lenis-expanding-div";
-import { cn } from "@/lib/utils";
 
 export function MainContainer({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
